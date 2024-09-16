@@ -10,6 +10,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
     # branches: master
 on:
   push:
+    branches: master
     tags: 
       - releases/v[0-9]+.[0-9]+.[0-9].
       - releases*
