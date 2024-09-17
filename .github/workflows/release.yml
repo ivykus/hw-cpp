@@ -13,9 +13,9 @@ on:
     branches: 
       - master
       - release
-    tags: 
-      - release/v[0-9]+.[0-9]+.[0-9].
-      - release*
+    # tags: 
+    #   - release/v[0-9]+.[0-9]+.[0-9].
+    #   - release*
 
 permissions:
   contents: write
