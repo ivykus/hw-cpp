@@ -35,9 +35,18 @@ std::vector<std::string> split(const std::string &str, char d)
 
 int main(int argc, char const *argv[])
 {
+    if (argc == 2 && std::string(argv[1]) == "-v" ) {
+
+        std::cout << "ip_filter version: " << argv[1] << std::endl;
+        
+        return EXIT_SUCCESS;
+    }
+
+
     try
     {
         std::vector<std::vector<std::string> > ip_pool;
+        
 
         for(std::string line; std::getline(std::cin, line);)
         {
