@@ -1,5 +1,5 @@
-name: HW2 test
-run-name: ${{ github.actor }} testing hw2
+name: 'release'
+run-name: ${{ github.actor }} release hw2
 # on: [create]
 # on:
 #   create:
@@ -13,9 +13,9 @@ on:
     branches: 
       - master
       - release
-    # tags: 
-    #   - release/v[0-9]+.[0-9]+.[0-9].
-    #   - release*
+    tags: 
+      - release/v[0-9]+.[0-9]+.[0-9].
+      - release*
 
 permissions:
   contents: write
@@ -29,17 +29,25 @@ jobs:
           submodules: true
       - run: cmake -S . -B build
       - run: cmake --build build
-      - run: ./build/ip_filter -v
-      
-    # steps:
-    #   - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-    #   - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-    #   - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-    #   - name: Check out repository code
-    #     uses: actions/checkout@v4
-    #   - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-    #   - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-    #   - name: List files in the repository
-    #     run: |
-    #       ls ${{ github.workspace }}
-    #   - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: cmake --build build --target package
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ip_filter-${{ github.ref }}-Linux.deb
+          asset_name: ./ip_filter-${{ github.ref }}-Linux.deb
+          asset_content_type: application/vnd.debian.binary-package
