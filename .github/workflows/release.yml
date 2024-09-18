@@ -51,7 +51,7 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v}" \
               --generate-notes \
-              "$packagePath#packageName"
+              "$packagePath#$packageName"
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
