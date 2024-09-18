@@ -44,7 +44,7 @@ jobs:
           releaseVersion=${tag#release/v}
           packageName="./ip_filter_hw-${releaseVersion}-Linux.deb"
           echo $releaseVersion
-          stat "*.deb"
+          stat "./*.deb"
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v}" \
