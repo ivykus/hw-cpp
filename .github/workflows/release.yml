@@ -42,11 +42,8 @@ jobs:
           tag: ${{ github.ref_name }}
         run: |
           releaseVersion=${tag#release/v}
-          packageName="./ip_filter_hw-${releaseVersion}-Linux.deb"
+          packageName="ip_filter_hw-${releaseVersion}-Linux.deb"
           packagePath=$(ls | grep Linux.deb)
-          echo $releaseVersion
-          ls
-          stat "ip_filter_hw-0.0.0-Linux.deb"
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v}" \
