@@ -23,24 +23,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           submodules: true
+
       - run: cmake -S . -B .
       - run: cmake --build .
       - run: cmake --build . --target package
+
       - run: ls
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "output:""$tag"
       - run: echo "${{ github.ref}}"
       - run: echo "${{ github.ref_name}}"
-      - run: echo "Tag name from GITHUB_REF_NAME:" "$GITHUB_REF_NAME"
-    #   - run: echo "${{ env.}}"
-      - run: |
-            ls
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,6 +46,27 @@ jobs:
               --title="${tag#v}" \
               --generate-notes \
               "./ip_filter_hw-${{ github.ref_name}}-Linux.deb"
+#   release:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "output:""$tag"
+#       - run: echo "${{ github.ref}}"
+#       - run: echo "${{ github.ref_name}}"
+#       - run: echo "Tag name from GITHUB_REF_NAME:" "$GITHUB_REF_NAME"
+#     #   - run: echo "${{ env.}}"
+#       - run: |
+#             ls
+#       - name: Create release
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           tag: ${{ github.ref_name }}
+#         run: |
+#           gh release create "$tag" \
+#               --repo="$GITHUB_REPOSITORY" \
+#               --title="${tag#v}" \
+#               --generate-notes \
+#               "./ip_filter_hw-${{ github.ref_name}}-Linux.deb"
 
         # run: |
         #   gh release create v0.0.1 \
