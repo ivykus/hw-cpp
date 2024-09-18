@@ -48,7 +48,9 @@ jobs:
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#v}" \
-              --generate-notes
+              --generate-notes \
+              "./ip_filter_hw-${{ github.ref_name}}-Linux.deb"
+
         # run: |
         #   gh release create v0.0.1 \
         #       --repo="$GITHUB_REPOSITORY" \
