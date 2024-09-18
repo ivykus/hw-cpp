@@ -43,6 +43,7 @@ jobs:
         run: |
           releaseVersion=${tag#release/v}
           packageName="./ip_filter_hw-${releaseVersion}-Linux.deb"
+          packagePath=$(ls | grep Linux.deb)
           echo $releaseVersion
           ls
           stat "ip_filter_hw-0.0.0-Linux.deb"
@@ -50,7 +51,7 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v}" \
               --generate-notes \
-              "./ip_filter_hw-*-Linux.deb#packageName"
+              "$packagePath#packageName"
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
