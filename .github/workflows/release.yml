@@ -35,6 +35,8 @@ jobs:
     steps:
       - run: echo "output:""$tag"
       - run: echo "${{ github.ref}}"
+      - run: echo "${{ github.ref_name}}"
+    #   - run: echo "${{ env.}}"
       - run: |
             ls
       - name: Create release
