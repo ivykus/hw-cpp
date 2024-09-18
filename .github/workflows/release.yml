@@ -42,11 +42,12 @@ jobs:
           tag: ${{ github.ref_name }}
         run: |
           releaseVersion=${tag#release/v}
+          echo $releaseVersion
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v" \
               --generate-notes \
-              './ip_filter_hw-${releaseVersion}-Linux.deb'
+              "./ip_filter_hw-${releaseVersion}-Linux.deb"
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
