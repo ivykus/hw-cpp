@@ -10,9 +10,9 @@ run-name: ${{ github.actor }} release hw2
     # branches: master
 on:
   push:
-    branches: 
+    # branches: 
     #   - master
-      - release
+    #   - release
     tags: 
       - v*
 
