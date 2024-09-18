@@ -41,11 +41,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
+          releaseVersion=${tag#release/v}
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v" \
               --generate-notes \
-              './ip_filter_hw-${tag#release/v}-Linux.deb'
+              './ip_filter_hw-${releaseVersion}-Linux.deb'
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
