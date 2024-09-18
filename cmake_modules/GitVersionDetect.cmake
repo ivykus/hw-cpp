@@ -45,8 +45,12 @@ if(GIT_EXECUTABLE)
     )
   # If no error took place, save the version
   if(NOT GIT_DESCRIBE_ERROR_CODE)
-    string(REGEX REPLACE "^v" "" GITVERSIONDETECT_VERSION "${GIT_DESCRIBE_VERSION}")
-  endif()
+    if(GIT_DESCRIBE_VERSION MATCHES "^v")
+      string(REGEX REPLACE "^v" "" GITVERSIONDETECT_VERSION "${GIT_DESCRIBE_VERSION}")
+    endif()
+    if(GIT_DESCRIBE_VERSION MATCHES "^release/v")
+      string(REGEX REPLACE "^release/v" "" GITVERSIONDETECT_VERSION "${GIT_DESCRIBE_VERSION}")
+    endif()
 endif()
 
 # Final fallback: Just use a bogus version string that is semantically older
