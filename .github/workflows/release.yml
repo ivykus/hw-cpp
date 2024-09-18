@@ -36,6 +36,7 @@ jobs:
       - run: echo "output:""$tag"
       - run: echo "${{ github.ref}}"
       - run: echo "${{ github.ref_name}}"
+      - run: echo "Tag name from GITHUB_REF_NAME:" "$GITHUB_REF_NAME"
     #   - run: echo "${{ env.}}"
       - run: |
             ls
