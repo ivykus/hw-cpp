@@ -45,7 +45,7 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#v}" \
               --generate-notes \
-              "./ip_filter_hw-"${tag#v}-Linux.deb"
+              "./ip_filter_hw-${tag#v}-Linux.deb"
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
