@@ -31,9 +31,10 @@ jobs:
       - run: cmake --build build
       - run: cmake --build build --target package
   release:
-    name: Release pushed tag
     runs-on: ubuntu-22.04
     steps:
+      - run: echo "$tag"
+      - run: ls
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
