@@ -45,7 +45,7 @@ jobs:
           echo $releaseVersion
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#release/v" \
+              --title="${tag#release/v}" \
               --generate-notes \
               "./ip_filter_hw-${releaseVersion}-Linux.deb"
 #   release:
