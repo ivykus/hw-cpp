@@ -14,7 +14,7 @@ on:
     #   - master
     #   - release
     tags: 
-      - v*
+      - release/v[0-9]+.[0-9]+.[0-9]* 
 
 permissions:
   contents: write
@@ -43,9 +43,9 @@ jobs:
         run: |
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#v}" \
+              --title="${tag#release/v" \
               --generate-notes \
-              "./ip_filter_hw-${tag#v}-Linux.deb"
+              "./ip_filter_hw-${tag#release/v}-Linux.deb"
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
