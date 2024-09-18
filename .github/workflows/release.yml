@@ -33,8 +33,10 @@ jobs:
   release:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "$tag"
-      - run: ls
+      - run: echo "output:""$tag"
+      - run: echo "${{ github.ref}}"
+      - run: |
+            ls
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
