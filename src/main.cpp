@@ -6,9 +6,6 @@
 
 #include "ip_filter.h"
 
-// test change again
-// new test change
-// test change
 
 int main(int argc, char const *argv[]) {
   try {
@@ -17,26 +14,19 @@ int main(int argc, char const *argv[]) {
     if (argc == 2) {
       ip_filter::read_file(ip_pool, argv[1]);
     } else {
-      for (std::string line; std::getline(std::cin, line);) {
-        std::vector<std::string> v = ip_filter::split(line, '\t');
-        ip_pool.push_back(ip_filter::split(v.at(0), '.'));
-      }
+        ip_filter::read_input(ip_pool);
     }
+
+    std::ostream &os = std::cout;
 
     // TODO reverse lexicographically sort
+    // ip_filter::print_ip_pool(ip_pool, std::cout);
 
-    for (std::vector<std::vector<std::string>>::const_iterator ip =
-             ip_pool.cbegin();
-         ip != ip_pool.cend(); ++ip) {
-      for (std::vector<std::string>::const_iterator ip_part = ip->cbegin();
-           ip_part != ip->cend(); ++ip_part) {
-        if (ip_part != ip->cbegin()) {
-          std::cout << ".";
-        }
-        std::cout << *ip_part;
-      }
-      std::cout << std::endl;
-    }
+    // std::cout << "Sorted: " << std::endl;
+    ip_filter::rev_lexi_sort(ip_pool);
+
+    ip_filter::print_ip_pool(ip_pool, std::cout);
+
 
     // 222.173.235.246
     // 222.130.177.64
@@ -46,17 +36,25 @@ int main(int argc, char const *argv[]) {
     // 1.29.168.152
     // 1.1.234.8
 
+    // std::cout << " --------------------" << std::endl;
+
     // TODO filter by first byte and output
     // ip = filter(1)
+    // std::cout << "Filtered by first" << std::endl;
+    ip_filter::print_filtered_by(ip_pool,os, 1);
 
     // 1.231.69.33
     // 1.87.203.225
     // 1.70.44.170
     // 1.29.168.152
     // 1.1.234.8
+    // std::cout << " --------------------" << std::endl;
+
 
     // TODO filter by first and second bytes and output
     // ip = filter(46, 70)
+    // std::cout << "Filtered by 46 and 70" << std::endl;
+    ip_filter::print_filtered_by(ip_pool, os, 46, 70);
 
     // 46.70.225.39
     // 46.70.147.26
@@ -64,7 +62,11 @@ int main(int argc, char const *argv[]) {
     // 46.70.29.76
 
     // TODO filter by any byte and output
+    // std::cout << "Filtererd by any 46" << std::endl;
+    ip_filter::print_filtered_by_any(ip_pool, os, 46);
     // ip = filter_any(46)
+    // std::cout << " --------------------" << std::endl;
+
 
     // 186.204.34.46
     // 186.46.222.194
