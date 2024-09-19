@@ -29,6 +29,7 @@ set_target_properties(run_tests PROPERTIES
 target_link_libraries(
     run_tests 
     GTest::gtest_main 
+    GTest::gmock
     ip_filter_lib
 )
 
