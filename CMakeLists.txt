@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.28)
 
+set(ProjName TODO)
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 
-include(TestScript)
 
 # Use git version detect to obtain a project version based on tags
 include(GitVersionDetect)
@@ -11,60 +12,44 @@ set(PROJECT_VERSION_MINOR ${GITVERSIONDETECT_VERSION_MINOR})
 set(PROJECT_VERSION_PATCH ${GITVERSIONDETECT_VERSION_PATCH})
 set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 
-project(ip_filter_hw VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
+project(${ProjName} VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 
 include_directories(src)
 
-add_executable(ip_filter 
+set(TargetName TODOapp) #TODO set app name
+
+add_executable(${TargetName} 
     src/main.cpp
-    # src/ip_filter.cpp
+    # TODO add src/.cpp files
 )
 
-add_library(ip_filter_lib STATIC
-    src/ip_filter.cpp
-    # src/ip_filter.cpp
-)
+set(LibName ) # TODO: setLibname
 
-set_target_properties(ip_filter PROPERTIES
+
+set_target_properties(${TargetName} PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
 
-target_include_directories(ip_filter
+target_include_directories(${TargetName}
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(ip_filter PRIVATE
-    ip_filter_lib 
-)
+if(DEFINED LibName)
+    add_library(${LibName} STATIC
+        # TODO add src/.pp files
+    )
+    target_link_libraries(${TargetName} PRIVATE
+        ${LibName} 
+    )
+endif()
+
 
 add_subdirectory(tests)
-# add_subdirectory(src)
-
-# enable_testing()
-
-# add_executable(run_tests tests.cpp)
-
-# set_target_properties(run_tests PROPERTIES
-#     CXX_STANDARD 14
-#     CXX_STANDARD_REQUIRED ON
-# )
-
-# target_link_libraries(
-#     run_tests 
-#     GTest::gtest_main 
-#     ip_filter_hw
-# )
-
-# add_test(run_tests run_tests)
-
-# include(GoogleTest)
-# gtest_discover_tests(run_tests)
-
 
 include(CTest)
 
-install(TARGETS ip_filter RUNTIME DESTINATION bin)
+install(TARGETS ${TargetName} RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 

@@ -1,5 +1,5 @@
 name: 'release'
-run-name: ${{ github.actor }} release hw2
+run-name: ${{ github.actor }} release 
 # on: [create]
 # on:
 #   create:
@@ -42,13 +42,16 @@ jobs:
           tag: ${{ github.ref_name }}
         run: |
           releaseVersion=${tag#release/v}
-          packageName="ip_filter_hw-${releaseVersion}-Linux.deb"
+          packageName=&(ls | grep Linux.deb)
           packagePath=$(ls | grep Linux.deb)
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#release/v}" \
               --generate-notes \
               "$packagePath#$packageName"
+# packageName="ip_filter_hw-${releaseVersion}-Linux.deb"
+
+
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest

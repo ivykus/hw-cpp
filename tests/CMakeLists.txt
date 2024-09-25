@@ -30,7 +30,7 @@ target_link_libraries(
     run_tests 
     GTest::gtest_main 
     GTest::gmock
-    ip_filter_lib
+    ${LibName}
 )
 
 add_test(run_tests run_tests)

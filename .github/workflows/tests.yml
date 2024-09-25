@@ -1,9 +1,10 @@
 name: 'dev'
-run-name: ${{ github.actor }} testing hw2
+run-name: ${{ github.actor }} testing
 on:
   push:
     branches: 
-      - master
+      - hw1
+      - hw2
 
 permissions:
   contents: write
