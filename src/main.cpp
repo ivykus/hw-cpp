@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]) {
 
     std::ostream &os = std::cout;
 
-    // TODO reverse lexicographically sort
+    // reverse lexicographically sort
     // ip_filter::print_ip_pool(ip_pool, std::cout);
 
     // std::cout << "Sorted: " << std::endl;
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
 
     // std::cout << " --------------------" << std::endl;
 
-    // TODO filter by first byte and output
+    // filter by first byte and output
     // ip = filter(1)
     // std::cout << "Filtered by first" << std::endl;
     ip_filter::print_filtered_by(ip_pool,os, 1);
@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]) {
     // std::cout << " --------------------" << std::endl;
 
 
-    // TODO filter by first and second bytes and output
+    //  filter by first and second bytes and output
     // ip = filter(46, 70)
     // std::cout << "Filtered by 46 and 70" << std::endl;
     ip_filter::print_filtered_by(ip_pool, os, 46, 70);
@@ -61,11 +61,19 @@ int main(int argc, char const *argv[]) {
     // 46.70.113.73
     // 46.70.29.76
 
-    // TODO filter by any byte and output
+    //  filter by any byte and output
     // std::cout << "Filtererd by any 46" << std::endl;
     ip_filter::print_filtered_by_any(ip_pool, os, 46);
     // ip = filter_any(46)
     // std::cout << " --------------------" << std::endl;
+
+    // {
+    //   auto = [](){
+        
+    //   }
+
+    // }
+    // ip_filter::print_filtered
 
 
     // 186.204.34.46

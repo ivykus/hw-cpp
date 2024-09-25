@@ -150,3 +150,16 @@ void ip_filter::print_filtered_by(const ip_filter::ip_pool_t &ip_pool,
     }
   }
 }
+
+// void ip_filter::print_filterd_by2(const ip_filter::ip_pool_t &ip_pool) {
+//}
+
+template<typename Pred>
+void print_filtered(const ip_filter::ip_pool_t ip_pool, Pred pred, std::ostream &os = std::cout) {
+  for(auto it = ip_pool.cbegin(); it != ip_pool.cend(); ++it) {
+    if (pred) {
+      print_ip(it, os);
+    } 
+  }
+
+}
